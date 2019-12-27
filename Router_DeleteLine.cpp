@@ -1,19 +1,30 @@
 #include"Router.h"
+#include <iostream>
+using namespace std;
+bool Router::DeleteLine(int *IP)               //É¾³ýÒ»Ìõ±ß
+{
+    Line *p = LineHead;
+    Line *p1 = nullptr;
+    while(p!=nullptr)
+    {
+        if(p->IP2[0]==IP[0]&&p->IP2[1]==IP[1]&&p->IP2[2]==IP[2]&&p->IP2[3]==IP[3])
+        {
 
-  bool DeleteLine(int *IP)               //É¾³ýÒ»Ìõ±ß
-  {
-      Line *p=LineHead->next,*p1=LineHead;
-      while(p!=NULL)
-      {
-          if(p->IP2[0]==IP[0]&&p->IP2[1]==IP[1]&&p->IP2[2]==IP[2]&&p->IP2[3]==IP[3])
-           {
-               Line*pp=p->next;
-               p1->next=pp;
-               delete p;
-               return true;
-           }
-          p1=p;  //ÔÝ´æ
-          p=p->next;
-      }
-      return false;
-  }
+            if(p1 != nullptr)
+            {
+                p1->next=p->next;
+                delete p;
+                return true;
+            }
+            else   //pÎªÍ·
+            {
+                LineHead = p->next;
+                delete p;
+                return true;
+            }
+        }
+        p1 = p;                               //ÔÝ´æ
+        p = p->next;
+    }
+    return false;
+}
